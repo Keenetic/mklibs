@@ -271,7 +271,8 @@ def multiarch(paths):
         deb_host_multiarch = deb_host_multiarch.rstrip('\n')
         new_paths = []
         for path in paths:
-            new_paths.append(os.path.join(path, deb_host_multiarch))
+            new_paths.append(
+                path.replace('/lib', '/lib/%s' % deb_host_multiarch, 1))
             new_paths.append(path)
         return new_paths
     else:
@@ -398,6 +399,10 @@ if include_default_lib_path == "yes":
 
 if libc_extras_dir_default:
     libc_extras_dir = libc_extras_dir.replace("/lib/", "/" + libdir + "/")
+    for path in multiarch([libc_extras_dir]):
+        if os.path.isdir(path):
+            libc_extras_dir = path
+            break
 
 if ldlib == "LDLIB":
     ldlib = os.getenv("ldlib")

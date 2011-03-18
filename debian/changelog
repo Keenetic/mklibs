@@ -1,3 +1,9 @@
+mklibs (0.1.33) UNRELEASED; urgency=low
+
+  * Adjust the libc_pic directory for multiarch as well.
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 18 Mar 2011 14:23:11 +0000
+
 mklibs (0.1.32) unstable; urgency=low
 
   * Add multiarch directories to the default library path if
