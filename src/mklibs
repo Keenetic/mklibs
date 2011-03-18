@@ -47,6 +47,7 @@ import os
 import glob
 import getopt
 from stat import *
+import subprocess
 
 DEBUG_NORMAL  = 1
 DEBUG_VERBOSE = 2
@@ -259,6 +260,23 @@ def extract_soname(so_file):
         return soname_data.pop()
     return ""
 
+def multiarch(paths):
+    devnull = open('/dev/null', 'w')
+    dpkg_architecture = subprocess.Popen(
+        ['dpkg-architecture', '-qDEB_HOST_MULTIARCH'],
+        stdout=subprocess.PIPE, stderr=devnull)
+    devnull.close()
+    deb_host_multiarch, _ = dpkg_architecture.communicate()
+    if dpkg_architecture.returncode == 0:
+        deb_host_multiarch = deb_host_multiarch.rstrip('\n')
+        new_paths = []
+        for path in paths:
+            new_paths.append(os.path.join(path, deb_host_multiarch))
+            new_paths.append(path)
+        return new_paths
+    else:
+        return paths
+
 def usage(was_err):
     if was_err:
         outfd = sys.stderr
@@ -321,7 +339,7 @@ lib_path = []
 dest_path = "DEST"
 ldlib = "LDLIB"
 include_default_lib_path = "yes"
-default_lib_path = ["/lib/", "/usr/lib/", "/usr/X11R6/lib/"]
+default_lib_path = multiarch(["/lib/", "/usr/lib/", "/usr/X11R6/lib/"])
 libc_extras_dir = "/usr/lib/libc_pic"
 libc_extras_dir_default = True
 libdir = "lib"

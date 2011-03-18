@@ -10,7 +10,7 @@ Vcs-Git: git://git.debian.org/d-i/mklibs.git
 
 Package: mklibs
 Architecture: all
-Depends: python, binutils, gcc, mklibs-copy (>= ${source:Version}), ${python:Depends}, ${misc:Depends}
+Depends: python (>= 2.4), binutils, gcc, mklibs-copy (>= ${source:Version}), ${python:Depends}, ${misc:Depends}
 Recommends: libc6-pic | libc6.1-pic | libc0.1-pic | libc0.3-pic
 Description: Shared library reduction script
  mklibs produces cut-down shared libraries that contain only the
@@ -20,7 +20,7 @@ Description: Shared library reduction script
 
 Package: mklibs-copy
 Architecture: any
-Depends: ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
+Depends: python (>= 2.4), ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
 Description: Shared library reduction script
  mklibs-copy produces a minimal set of shared libraries that contain
  only the libs which are required by a particular set of executables.
