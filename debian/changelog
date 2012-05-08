@@ -1,4 +1,4 @@
-mklibs (0.1.34) UNRELEASED; urgency=low
+mklibs (0.1.34) unstable; urgency=low
 
   [ Cyril Brulebois ]
   * Fix FTBFS with gcc 4.7 due to missing <unistd.h> include (closes:
@@ -10,7 +10,7 @@ mklibs (0.1.34) UNRELEASED; urgency=low
     break armel (or anything else with a linker by that SONAME), as
     linkers are treated specially and copied anyway (LP: #984007)
 
- -- Colin Watson <cjwatson@debian.org>  Thu, 05 Apr 2012 00:15:27 +0000
+ -- Colin Watson <cjwatson@debian.org>  Tue, 08 May 2012 16:17:59 +0100
 
 mklibs (0.1.33) unstable; urgency=low
 
