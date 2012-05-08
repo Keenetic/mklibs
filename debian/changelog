@@ -4,7 +4,13 @@ mklibs (0.1.34) UNRELEASED; urgency=low
   * Fix FTBFS with gcc 4.7 due to missing <unistd.h> include (closes:
     #667282).
 
- -- Cyril Brulebois <kibi@debian.org>  Thu, 05 Apr 2012 00:15:27 +0000
+  [ Adam Conrad ]
+  * Ignore claims of NEEDED *@ld-linux.so.3 symbols, as this completely
+    confuses armhf's double linker situation, and doing so doesn't
+    break armel (or anything else with a linker by that SONAME), as
+    linkers are treated specially and copied anyway (LP: #984007)
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 05 Apr 2012 00:15:27 +0000
 
 mklibs (0.1.33) unstable; urgency=low
 
