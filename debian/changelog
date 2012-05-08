@@ -1,3 +1,11 @@
+mklibs (0.1.34) UNRELEASED; urgency=low
+
+  [ Cyril Brulebois ]
+  * Fix FTBFS with gcc 4.7 due to missing <unistd.h> include (closes:
+    #667282).
+
+ -- Cyril Brulebois <kibi@debian.org>  Thu, 05 Apr 2012 00:15:27 +0000
+
 mklibs (0.1.33) unstable; urgency=low
 
   * Adjust the libc_pic directory for multiarch as well.
