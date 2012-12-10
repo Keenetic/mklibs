@@ -2,7 +2,7 @@ Source: mklibs
 Section: devel
 Priority: optional
 Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
-Build-Depends: debhelper (>= 7.3.0~), python-support
+Build-Depends: debhelper (>= 7.3.0~), python-support, dh-autoreconf
 Standards-Version: 3.8.2.0
 Uploaders: Phil Blundell <pb@debian.org>, Tollef Fog Heen <tfheen@debian.org>, Jeff Bailey <jbailey@nisa.net>, Bastian Blank <waldi@debian.org>, Steve Langasek <vorlon@debian.org>
 Vcs-Browser: http://git.debian.org/?p=d-i/mklibs.git
