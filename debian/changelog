@@ -1,9 +1,13 @@
 mklibs (0.1.35) UNRELEASED; urgency=low
 
+  [ Cyril Brulebois ]
   * Simplify autoreconfing:
     - Add dh-autoreconf build-dep.
     - Add “--with autoreconf” accordingly.
     - Get rid of the “configure” target accordingly.
+
+  [ Colin Watson ]
+  * Depend on dpkg-dev for dpkg-architecture (LP: #977347).
 
  -- Cyril Brulebois <kibi@debian.org>  Mon, 10 Dec 2012 16:55:09 +0100
 
