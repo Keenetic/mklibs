@@ -1,3 +1,11 @@
+mklibs (0.1.36) UNRELEASED; urgency=low
+
+  * Use AC_CANONICAL_HOST rather than AC_CANONICAL_TARGET.  We do not use
+    the results of the latter, and it causes warnings from autoconf due to
+    macro ordering relative to AM_INIT_AUTOMAKE.
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 14 May 2013 23:25:20 +0100
+
 mklibs (0.1.35) unstable; urgency=low
 
   [ Cyril Brulebois ]
