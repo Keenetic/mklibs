@@ -1,3 +1,6 @@
 #! /usr/bin/make -f
 %:
 	dh $@ --builddirectory=build-deb --with=autoreconf,python2
+
+override_dh_python2:
+	dh_python2 /usr/lib/mklibs/python

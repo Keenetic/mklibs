@@ -4,6 +4,7 @@ mklibs (0.1.37) UNRELEASED; urgency=low
     sure it gets installed to the path specified in ELF headers (closes:
     #256998; thanks, Adam Conrad).
   * Switch from python-support to dh_python2 (thanks, Matthias Klose).
+  * Properly byte-compile modules under /usr/lib/mklibs/python/.
 
  -- Colin Watson <cjwatson@debian.org>  Fri, 17 May 2013 11:47:29 +0100
 
