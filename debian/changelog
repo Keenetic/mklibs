@@ -5,6 +5,7 @@ mklibs (0.1.37) UNRELEASED; urgency=low
     #256998; thanks, Adam Conrad).
   * Switch from python-support to dh_python2 (thanks, Matthias Klose).
   * Properly byte-compile modules under /usr/lib/mklibs/python/.
+  * Switch to debhelper 9, thereby making use of dpkg-buildflags.
 
  -- Colin Watson <cjwatson@debian.org>  Fri, 17 May 2013 11:47:29 +0100
 
