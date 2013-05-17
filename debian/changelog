@@ -3,6 +3,7 @@ mklibs (0.1.37) UNRELEASED; urgency=low
   * Stop handling the linker as "just another library", and instead make
     sure it gets installed to the path specified in ELF headers (closes:
     #256998; thanks, Adam Conrad).
+  * Switch from python-support to dh_python2 (thanks, Matthias Klose).
 
  -- Colin Watson <cjwatson@debian.org>  Fri, 17 May 2013 11:47:29 +0100
 
