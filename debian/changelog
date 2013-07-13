@@ -1,8 +1,15 @@
 mklibs (0.1.38) UNRELEASED; urgency=low
 
+  [ Dmitrijs Ledkovs ]
   * Set debian source format to '3.0 (native)'.
   * Set Vcs-* to canonical format.
   * Simply use (>= 9) version specifier for debhelper.
+
+  [ Christian Perrier ]
+  * Add myself to Uploaders
+  * Drop Phil Blundell, Tollef Fog Heen, Jeff Bailey from Uploaders as they
+    haven't worked on the package for a very long time. Thanks for your
+    pastwork.
 
  -- Dmitrijs Ledkovs <xnox@debian.org>  Fri, 07 Jun 2013 00:26:01 +0100
 
