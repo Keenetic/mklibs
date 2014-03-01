@@ -433,7 +433,7 @@ if not ldlib:
 debug(DEBUG_NORMAL, "I: Using", ldlib, "as dynamic linker.")
 
 # Check for rpaths
-for obj in objects.values():
+for obj in sorted(objects.values()):
     rpath_val = rpath(obj)
     if rpath_val:
         if root:
@@ -454,8 +454,8 @@ while 1:
     debug(DEBUG_NORMAL, "I: library reduction pass", `passnr`)
     if debuglevel >= DEBUG_VERBOSE:
         print "Objects:",
-        for obj in objects.values():
-            print obj[string.rfind(obj, '/') + 1:],
+        for obj in sorted([x[string.rfind(x, '/') + 1:] for x in objects.values()]):
+            print obj,
         print
 
     passnr = passnr + 1
@@ -471,14 +471,14 @@ while 1:
             objects[inode] = obj
 
     # DEBUG
-    for obj in objects.values():
+    for obj in sorted(objects.values()):
         small_libs.append(obj)
         debug(DEBUG_VERBOSE, "Object:", obj)
 
     # calculate what symbols and libraries are needed
     needed_symbols = {}
     libraries = set(force_libs)
-    for obj in objects.values():
+    for obj in sorted(objects.values()):
         for symbol in undefined_symbols(obj):
             # Some undefined symbols in libthread_db are defined in
             # the application that uses it.  __gnu_local_gp is defined
@@ -563,7 +563,7 @@ while 1:
             library_symbols_used[lib].add(library_symbols[lib][name])
 
     # reduce libraries
-    for library in libraries:
+    for library in sorted(libraries):
         debug(DEBUG_VERBOSE, "reducing", library)
         debug(DEBUG_SPAM, "using: " + ' '.join([str(i) for i in library_symbols_used[library]]))
         so_file = find_lib(library)
@@ -643,7 +643,7 @@ for lib in regexpfilter(os.listdir(dest_path), "(.*-so)$"):
     os.remove(dest_path + "/" + lib)
 
 # Canonicalize library names.
-for lib in regexpfilter(os.listdir(dest_path), "(.*so[.\d]*)$"):
+for lib in sorted(regexpfilter(os.listdir(dest_path), "(.*so[.\d]*)$")):
     this_lib_path = dest_path + "/" + lib
     if os.path.islink(this_lib_path):
         debug(DEBUG_VERBOSE, "Unlinking %s." % lib)
