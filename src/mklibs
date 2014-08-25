@@ -137,6 +137,14 @@ class UndefinedSymbol(Symbol):
         super(UndefinedSymbol, self).__init__(name, version, library)
         self.weak, self.library = weak, library
 
+def symbol_is_blacklisted(name):
+    # The ARM Embedded ABI spec states symbols under this namespace as
+    # possibly appearing in output objects.
+    if name.startswith("__aeabi_"):
+        return True
+
+    return False
+
 # Return undefined symbols in an object as a set of tuples (name, weakness)
 def undefined_symbols(obj):
     if not os.access(obj, os.F_OK):
@@ -147,6 +155,9 @@ def undefined_symbols(obj):
     result = []
     for line in output:
         name, weak_string, version_string, library_string = line.split()[:4]
+
+        if symbol_is_blacklisted(name):
+            continue
 
         weak = False
         if weak_string.lower() == 'true':
