@@ -1,10 +1,11 @@
-mklibs (0.1.40) UNRELEASED; urgency=medium
+mklibs (0.1.40) unstable; urgency=medium
 
+  [ Ian Campbell ]
   * Ignore all ARM EABI symbols (__aeabi_*). These are artefacts of the
     ABI and not real symbols which need to be present (See: #758581).
     Thanks, Adam Conrad!
 
- -- Ian Campbell <ijc@hellion.org.uk>  Mon, 25 Aug 2014 02:08:09 +0100
+ -- Cyril Brulebois <kibi@debian.org>  Mon, 25 Aug 2014 03:49:55 +0200
 
 mklibs (0.1.39) unstable; urgency=medium
 
