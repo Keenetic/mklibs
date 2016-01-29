@@ -5,8 +5,8 @@ Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
 Build-Depends: debhelper (>= 9), python (>= 2.6.6-3~), dh-autoreconf
 Standards-Version: 3.8.2.0
 Uploaders: Bastian Blank <waldi@debian.org>, Steve Langasek <vorlon@debian.org>, Christian Perrier <bubulle@debian.org>
-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=d-i/mklibs.git
-Vcs-Git: git://anonscm.debian.org/d-i/mklibs.git
+Vcs-Browser: https://anonscm.debian.org/cgit/d-i/mklibs.git
+Vcs-Git: https://anonscm.debian.org/git/d-i/mklibs.git
 X-Python-Version: >= 2.4
 
 Package: mklibs
