@@ -1,3 +1,13 @@
+mklibs (0.1.42) UNRELEASED; urgency=medium
+
+  * mklibs-readelf: Initialize section_DYNAMIC and section_DYNSYM to
+    NULL to make sure they don't end up with a random address, which
+    could lead to a segfault when trying to access them. This was
+    seen under fakeroot with the debian-installer FTBFS on armel, armhf,
+    i386, mips, and mipsel since early september (Closes: #839264).
+
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 30 Sep 2016 20:48:47 +0000
+
 mklibs (0.1.41) unstable; urgency=medium
 
   [ Colin Watson ]

@@ -112,6 +112,8 @@ file_data<_class, _data>::file_data(uint8_t *mem, size_t len) throw (std::bad_al
 
   this->sections.resize (this->shnum);
 
+  section_DYNAMIC = NULL;
+  section_DYNSYM = NULL;
   section_GNU_VERDEF = NULL;
   section_GNU_VERNEED = NULL;
   section_GNU_VERSYM = NULL;
