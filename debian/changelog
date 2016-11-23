@@ -1,7 +1,7 @@
 mklibs (0.1.43) UNRELEASED; urgency=medium
 
-  * Add support for DT_RUNPATH in addition to DT_RPATH. Main reasons to
-    do so include:
+  * Add support for DT_RUNPATH in addition to DT_RPATH (Closes: #845418).
+    Main reasons to do so include:
      - according to the elf.h header, the latter is deprecated.
      - new versions of binutils generate DT_RUNPATH entries instead of
        DT_RPATH ones, as detailed in cdebconf's #845414.
