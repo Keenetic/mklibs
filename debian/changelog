@@ -1,4 +1,4 @@
-mklibs (0.1.43) UNRELEASED; urgency=medium
+mklibs (0.1.43) unstable; urgency=medium
 
   * Add support for DT_RUNPATH in addition to DT_RPATH (Closes: #845418).
     Main reasons to do so include:
@@ -6,7 +6,7 @@ mklibs (0.1.43) UNRELEASED; urgency=medium
      - new versions of binutils generate DT_RUNPATH entries instead of
        DT_RPATH ones, as detailed in cdebconf's #845414.
 
- -- Cyril Brulebois <kibi@debian.org>  Wed, 23 Nov 2016 08:21:57 +0100
+ -- Cyril Brulebois <kibi@debian.org>  Wed, 23 Nov 2016 09:03:52 +0100
 
 mklibs (0.1.42) unstable; urgency=high
 
