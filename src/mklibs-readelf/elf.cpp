@@ -419,6 +419,7 @@ dynamic_data<_class, _data>::dynamic_data (Dyn *dyn) throw ()
     case DT_NEEDED:
     case DT_SONAME:
     case DT_RPATH:
+    case DT_RUNPATH:
       this->is_string = true;
       break;
     default:

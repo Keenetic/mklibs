@@ -1,3 +1,13 @@
+mklibs (0.1.43) UNRELEASED; urgency=medium
+
+  * Add support for DT_RUNPATH in addition to DT_RPATH. Main reasons to
+    do so include:
+     - according to the elf.h header, the latter is deprecated.
+     - new versions of binutils generate DT_RUNPATH entries instead of
+       DT_RPATH ones, as detailed in cdebconf's #845414.
+
+ -- Cyril Brulebois <kibi@debian.org>  Wed, 23 Nov 2016 08:21:57 +0100
+
 mklibs (0.1.42) unstable; urgency=high
 
   * mklibs-readelf: Initialize section_DYNAMIC and section_DYNSYM to

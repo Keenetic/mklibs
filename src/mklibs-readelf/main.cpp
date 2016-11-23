@@ -147,6 +147,7 @@ static void process (command cmd, const char *filename)
       break;
     case COMMAND_PRINT_RPATH:
       process_dynamics (file, DT_RPATH);
+      process_dynamics (file, DT_RUNPATH);
       break;
     case COMMAND_PRINT_SONAME:
       process_dynamics (file, DT_SONAME);
