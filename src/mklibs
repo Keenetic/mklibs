@@ -513,7 +513,9 @@ while 1:
             debug(DEBUG_SPAM, "present_symbols adding %s" % symbol)
             names = symbol.base_names()
             for name in names:
-                present_symbols[name] = symbol
+                if (not (name in needed_symbols
+                         and needed_symbols[name].weak)):
+                    present_symbols[name] = symbol
 
     # are we finished?
     num_unresolved = 0
@@ -530,7 +532,7 @@ while 1:
     if num_unresolved == 0:
         break
 
-    if unresolved == previous_pass_unresolved:
+    if unresolved <= previous_pass_unresolved:
         # No progress in last pass. Verify all remaining symbols are weak.
         for name in unresolved:
             if not needed_symbols[name].weak:
