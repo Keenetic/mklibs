@@ -441,6 +441,8 @@ if not ldlib:
 if not ldlib:
     sys.exit("E: Dynamic linker not found, aborting.")
 
+ldlib = sysroot + ldlib
+
 debug(DEBUG_NORMAL, "I: Using", ldlib, "as dynamic linker.")
 
 # Check for rpaths
@@ -666,22 +668,12 @@ for lib in sorted(regexpfilter(os.listdir(dest_path), "(.*so[.\d]*)$")):
         os.rename(dest_path + "/" + lib, dest_path + "/" + soname)
 
 # Make sure the dynamic linker is present and is executable
-# at its correct location (and not duplicated in /lib)
 ld_file_name = os.path.basename(ldlib)
-ld_path_name = os.path.dirname(ldlib)
-ld_full_path = "../" + ldlib
 ld_file = find_lib(ld_file_name)
 
-if ld_path_name != "/lib":
-    if os.access(dest_path + "/" + ld_file_name, os.F_OK):
-        os.remove(dest_path + "/" + ld_file_name)
-
-if not os.path.exists(dest_path + "/../" + ld_path_name):
-    os.mkdir(dest_path + "/../" + ld_path_name)
-
-if not os.access(dest_path + "/" + ld_full_path, os.F_OK):
-    debug(DEBUG_NORMAL, "I: stripping and copying dynamic linker to " + ld_full_path)
+if not os.access(dest_path + "/" + ld_file_name, os.F_OK):
+    debug(DEBUG_NORMAL, "I: stripping and copying dynamic linker.")
     command(target + "objcopy", "--strip-unneeded -R .note -R .comment",
-            ld_file, dest_path + "/" + ld_full_path)
+            ld_file, dest_path + "/" + ld_file_name)
 
-os.chmod(dest_path + "/" + ld_full_path, 0755)
+os.chmod(dest_path + "/" + ld_file_name, 0755)

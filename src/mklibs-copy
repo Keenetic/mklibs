@@ -254,22 +254,12 @@ for lib in regexpfilter(os.listdir(dest_path), "(.*-so)$"):
     os.remove(dest_path + "/" + lib)
 
 # Make sure the dynamic linker is present and is executable
-# at its correct location (and not duplicated in /lib)
-ld_file_name = os.path.basename(ldlib)
-ld_path_name = os.path.dirname(ldlib)
-ld_full_path = "../" + ldlib
-ld_file = find_lib(ld_file_name)
+ld_file = find_lib(ldlib)
+ld_file_name = os.path.basename(ld_file)
 
-if ld_path_name != "/lib":
-    if os.access(dest_path + "/" + ld_file_name, os.F_OK):
-        os.remove(dest_path + "/" + ld_file_name)
-
-if not os.path.exists(dest_path + "/../" + ld_path_name):
-    os.mkdir(dest_path + "/../" + ld_path_name)
-
-if not os.access(dest_path + "/" + ld_full_path, os.F_OK):
-    logger.info("stripping and copying dynamic linker to " + ld_full_path)
+if not os.access(dest_path + "/" + ld_file_name, os.F_OK):
+    logger.info("stripping and copying dynamic linker.")
     command(target + "objcopy", "--strip-unneeded -R .note -R .comment",
-            ld_file, dest_path + "/" + ld_full_path)
+            ld_file, dest_path + "/" + ld_file_name)
 
-os.chmod(dest_path + "/" + ld_full_path, 0755)
+os.chmod(dest_path + "/" + ld_file_name, 0755)
