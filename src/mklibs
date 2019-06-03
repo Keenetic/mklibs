@@ -440,6 +440,7 @@ if not ldlib:
     sys.exit("E: Dynamic linker not found, aborting.")
 
 ldlib = sysroot + ldlib
+ld_file_name = os.path.basename(ldlib)
 
 debug(DEBUG_NORMAL, "I: Using", ldlib, "as dynamic linker.")
 
@@ -614,6 +615,10 @@ while 1:
             if map_file:
                 extra_flags.append("-Wl,--version-script=" + map_file)
 
+            if ld_file_name.startswith("ld-uClibc"):
+                extra_post_obj.append(sysroot + libc_extras_dir + "/uclibc_nonshared.a")
+                extra_post_obj.append(sysroot + libc_extras_dir + "/libpthread_nonshared.a")
+
             # compile in only used symbols
             cmd = []
             cmd.extend(gcc_options)
@@ -652,7 +657,6 @@ for lib in sorted(regexpfilter(os.listdir(dest_path), "(.*so[.\d]*)$")):
         os.rename(dest_path + "/" + lib, dest_path + "/" + soname)
 
 # Make sure the dynamic linker is present and is executable
-ld_file_name = os.path.basename(ldlib)
 ld_file = find_lib(ld_file_name)
 
 if not os.access(dest_path + "/" + ld_file_name, os.F_OK):
