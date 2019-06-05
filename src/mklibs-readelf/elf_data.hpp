@@ -94,7 +94,7 @@ namespace Elf
     class file_data : public file
     {
       public:
-        file_data(uint8_t *, size_t len) throw (std::bad_alloc, std::runtime_error);
+        file_data(uint8_t *, size_t len);
 
         const uint8_t get_class() const throw () { return _class::id; }
         const uint8_t get_data() const throw () { return _data::id; }
@@ -109,7 +109,7 @@ namespace Elf
       public:
         section_data(Shdr *, uint8_t *) throw ();
 
-        virtual void update(const file &) throw (std::bad_alloc);
+        virtual void update(const file &);
     };
 
   template <typename _class, typename _data, typename _type>
@@ -133,9 +133,9 @@ namespace Elf
         typedef typename _elfdef<_class>::Shdr Shdr;
 
       public:
-        section_real(Shdr *, uint8_t *) throw (std::bad_alloc);
+        section_real(Shdr *, uint8_t *);
 
-        void update(const file &) throw (std::bad_alloc);
+        void update(const file &);
     };
 
   template <typename _class, typename _data>
@@ -147,9 +147,9 @@ namespace Elf
         typedef typename _elfdef<_class>::Shdr Shdr;
 
       public:
-        section_real(Shdr *, uint8_t *) throw (std::bad_alloc);
+        section_real(Shdr *, uint8_t *);
 
-        void update(const file &) throw (std::bad_alloc);
+        void update(const file &);
     };
 
   template <typename _class, typename _data>
@@ -161,9 +161,9 @@ namespace Elf
         typedef typename _elfdef<_class>::Shdr Shdr;
 
       public:
-        section_real(Shdr *, uint8_t *) throw (std::bad_alloc);
+        section_real(Shdr *, uint8_t *);
 
-        void update(const file &) throw (std::bad_alloc);
+        void update(const file &);
     };
 
   template <typename _class, typename _data>
@@ -175,9 +175,9 @@ namespace Elf
         typedef typename _elfdef<_class>::Shdr Shdr;
 
       public:
-        section_real(Shdr *, uint8_t *) throw (std::bad_alloc);
+        section_real(Shdr *, uint8_t *);
 
-        void update(const file &) throw (std::bad_alloc);
+        void update(const file &);
     };
 
   template <typename _class, typename _data>
@@ -189,7 +189,7 @@ namespace Elf
         typedef typename _elfdef<_class>::Shdr Shdr;
 
       public:
-        section_real(Shdr *, uint8_t *) throw (std::bad_alloc);
+        section_real(Shdr *, uint8_t *);
     };
 
   template <typename _class, typename _data>
@@ -220,7 +220,7 @@ namespace Elf
         typedef typename _elfdef<_class>::Phdr Phdr;
 
       public:
-        segment_real (Phdr *, uint8_t *) throw (std::bad_alloc);
+        segment_real (Phdr *, uint8_t *);
     };
 
   template <typename _class, typename _data>
@@ -232,7 +232,7 @@ namespace Elf
       public:
         dynamic_data (Dyn *) throw ();
 
-        void update_string(const section_type<section_type_STRTAB> &) throw (std::bad_alloc);
+        void update_string(const section_type<section_type_STRTAB> &);
     };
 
   template <typename _class, typename _data>
@@ -244,8 +244,8 @@ namespace Elf
       public:
         symbol_data (Sym *) throw ();
 
-        void update_string(const section_type<section_type_STRTAB> &) throw (std::bad_alloc);
-        virtual void update_version (const file &, uint16_t) throw (std::bad_alloc);
+        void update_string(const section_type<section_type_STRTAB> &);
+        virtual void update_version (const file &, uint16_t);
     };
 
   template <typename _class, typename _data>
@@ -257,7 +257,7 @@ namespace Elf
 
         version_definition_data (Verdef *) throw ();
 
-        void update_string(const section_type<section_type_STRTAB> &) throw (std::bad_alloc);
+        void update_string(const section_type<section_type_STRTAB> &);
     };
 
   template <typename _class, typename _data>
@@ -269,7 +269,7 @@ namespace Elf
 
         version_requirement_data (Verneed *) throw ();
 
-        void update_string(const section_type<section_type_STRTAB> &) throw (std::bad_alloc);
+        void update_string(const section_type<section_type_STRTAB> &);
     };
 
   template <typename _class, typename _data>
@@ -280,7 +280,7 @@ namespace Elf
 
         version_requirement_entry_data (Vernaux *, const version_requirement &) throw ();
 
-        void update_string(const section_type<section_type_STRTAB> &) throw (std::bad_alloc);
+        void update_string(const section_type<section_type_STRTAB> &);
     };
 }
 

@@ -49,7 +49,7 @@ namespace Elf
       const uint16_t get_shstrndx() const throw () { return shstrndx; }
 
       const std::vector<section *> get_sections() const throw () { return sections; };
-      const section &get_section(unsigned int i) const throw (std::out_of_range) { return *sections.at(i); };
+      const section &get_section(unsigned int i) const { return *sections.at(i); };
       const section_type<section_type_DYNAMIC> *get_section_DYNAMIC() const throw () { return section_DYNAMIC; };
       const section_type<section_type_DYNSYM> *get_section_DYNSYM() const throw () { return section_DYNSYM; };
       const section_type<section_type_GNU_VERDEF> *get_section_GNU_VERDEF() const throw () { return section_GNU_VERDEF; };
@@ -59,13 +59,13 @@ namespace Elf
       const std::vector<segment *> get_segments() const throw () { return segments; };
       const segment_type<segment_type_INTERP> *get_segment_INTERP() const throw () { return segment_INTERP; };
 
-      static file *open(const char *filename) throw (std::bad_alloc, std::runtime_error);
+      static file *open(const char *filename);
 
     protected:
-      file(uint8_t *mem, size_t len) throw (std::bad_alloc) : mem(mem), len(len) { }
+      file(uint8_t *mem, size_t len) : mem(mem), len(len) { }
 
       template<typename _class>
-        static file *open_class(uint8_t *, size_t) throw (std::bad_alloc, std::runtime_error);
+        static file *open_class(uint8_t *, size_t);
 
       uint16_t type;
       uint16_t machine;
@@ -128,7 +128,7 @@ namespace Elf
     class section_type<section_type_STRTAB> : public virtual section
     {
       public:
-        std::string get_string(uint32_t offset) const throw (std::bad_alloc)
+        std::string get_string(uint32_t offset) const
         {
           return std::string(reinterpret_cast<const char *> (mem + offset));
         }
@@ -263,10 +263,10 @@ namespace Elf
       uint8_t get_bind () const throw () { return bind; }
       uint8_t get_type () const throw () { return type; }
       const std::string &get_name_string() const throw () { return name_string; }
-      std::string get_version() const throw (std::bad_alloc);
-      std::string get_version_file() const throw (std::bad_alloc);
+      std::string get_version() const;
+      std::string get_version_file() const;
       uint16_t get_version_data() const throw () { return versym; }
-      std::string get_name_version() const throw (std::bad_alloc);
+      std::string get_name_version() const;
 
     protected:
       uint32_t name;
@@ -305,7 +305,7 @@ namespace Elf
   class version_requirement
   {
     public:
-      version_requirement() throw (std::bad_alloc);
+      version_requirement();
       virtual ~version_requirement () throw () { }
 
       const std::string &get_file() const throw () { return file_string; }

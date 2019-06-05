@@ -36,7 +36,7 @@ file::~file () throw ()
     delete *it;
 }
 
-file *file::open (const char *filename) throw (std::bad_alloc, std::runtime_error)
+file *file::open (const char *filename)
 {
   struct stat buf;
   int fd;
@@ -72,7 +72,7 @@ file *file::open (const char *filename) throw (std::bad_alloc, std::runtime_erro
 }
 
 template<typename _class>
-file *file::open_class(uint8_t *mem, size_t len) throw (std::bad_alloc, std::runtime_error)
+file *file::open_class(uint8_t *mem, size_t len)
 {
   switch (mem[EI_DATA])
   {
@@ -86,7 +86,7 @@ file *file::open_class(uint8_t *mem, size_t len) throw (std::bad_alloc, std::run
 }
 
 template <typename _class, typename _data>
-file_data<_class, _data>::file_data(uint8_t *mem, size_t len) throw (std::bad_alloc, std::runtime_error)
+file_data<_class, _data>::file_data(uint8_t *mem, size_t len)
 : file(mem, len)
 {
   if (mem[EI_CLASS] != _class::id)
@@ -190,7 +190,7 @@ section_data<_class, _data>::section_data(Shdr *shdr, uint8_t *mem) throw ()
 }
 
 template <typename _class, typename _data>
-void section_data<_class, _data>::update(const file &file) throw (std::bad_alloc)
+void section_data<_class, _data>::update(const file &file)
 {
   const section_type<section_type_STRTAB> &section =
     dynamic_cast<const section_type<section_type_STRTAB> &>(file.get_section(file.get_shstrndx()));
@@ -204,7 +204,7 @@ section_type<section_type_DYNAMIC>::~section_type() throw ()
 }
 
 template <typename _class, typename _data>
-section_real<_class, _data, section_type_DYNAMIC>::section_real(Shdr *header, uint8_t *mem) throw (std::bad_alloc)
+section_real<_class, _data, section_type_DYNAMIC>::section_real(Shdr *header, uint8_t *mem)
 : section_data<_class, _data>(header, mem)
 {
   if (this->type != SHT_DYNAMIC)
@@ -221,7 +221,7 @@ section_real<_class, _data, section_type_DYNAMIC>::section_real(Shdr *header, ui
 }
 
 template <typename _class, typename _data>
-void section_real<_class, _data, section_type_DYNAMIC>::update(const file &file) throw (std::bad_alloc)
+void section_real<_class, _data, section_type_DYNAMIC>::update(const file &file)
 {
   section_data<_class, _data>::update(file);
 
@@ -243,7 +243,7 @@ section_type<section_type_DYNSYM>::~section_type() throw ()
 }
 
 template <typename _class, typename _data>
-section_real<_class, _data, section_type_DYNSYM>::section_real(Shdr *header, uint8_t *mem) throw (std::bad_alloc)
+section_real<_class, _data, section_type_DYNSYM>::section_real(Shdr *header, uint8_t *mem)
 : section_data<_class, _data>(header, mem)
 {
   if (this->type != SHT_DYNSYM)
@@ -260,7 +260,7 @@ section_real<_class, _data, section_type_DYNSYM>::section_real(Shdr *header, uin
 }
 
 template <typename _class, typename _data>
-void section_real<_class, _data, section_type_DYNSYM>::update(const file &file) throw (std::bad_alloc)
+void section_real<_class, _data, section_type_DYNSYM>::update(const file &file)
 {
   section_data<_class, _data>::update (file);
 
@@ -285,7 +285,7 @@ const version_definition *section_type<section_type_GNU_VERDEF>::get_version_def
 }
 
 template <typename _class, typename _data>
-section_real<_class, _data, section_type_GNU_VERDEF>::section_real(Shdr *header, uint8_t *mem) throw (std::bad_alloc)
+section_real<_class, _data, section_type_GNU_VERDEF>::section_real(Shdr *header, uint8_t *mem)
 : section_data<_class, _data>(header, mem)
 {
   if (this->type != SHT_GNU_verdef)
@@ -307,7 +307,7 @@ section_real<_class, _data, section_type_GNU_VERDEF>::section_real(Shdr *header,
 }
 
 template <typename _class, typename _data>
-void section_real<_class, _data, section_type_GNU_VERDEF>::update(const file &file) throw (std::bad_alloc)
+void section_real<_class, _data, section_type_GNU_VERDEF>::update(const file &file)
 {
   section_data<_class, _data>::update(file);
 
@@ -333,7 +333,7 @@ const version_requirement_entry *section_type<section_type_GNU_VERNEED>::get_ver
 
 template <typename _class, typename _data>
 section_real<_class, _data, section_type_GNU_VERNEED>::
-section_real(Shdr *header, uint8_t *mem) throw (std::bad_alloc)
+section_real(Shdr *header, uint8_t *mem)
 : section_data<_class, _data> (header, mem)
 {
   if (this->type != SHT_GNU_verneed)
@@ -355,7 +355,7 @@ section_real(Shdr *header, uint8_t *mem) throw (std::bad_alloc)
 }
 
 template <typename _class, typename _data>
-void section_real<_class, _data, section_type_GNU_VERNEED>::update(const file &file) throw (std::bad_alloc)
+void section_real<_class, _data, section_type_GNU_VERNEED>::update(const file &file)
 {
   section_data<_class, _data>::update(file);
 
@@ -372,7 +372,7 @@ void section_real<_class, _data, section_type_GNU_VERNEED>::update(const file &f
 
 template <typename _class, typename _data>
 section_real<_class, _data, section_type_GNU_VERSYM>::
-section_real (Shdr *header, uint8_t *mem) throw (std::bad_alloc)
+section_real (Shdr *header, uint8_t *mem)
 : section_data<_class, _data> (header, mem)
 {
   if (this->type != SHT_GNU_versym)
@@ -399,7 +399,7 @@ segment_data<_class, _data>::segment_data (Phdr *phdr, uint8_t *mem) throw ()
 }
 
 template <typename _class, typename _data>
-segment_real<_class, _data, segment_type_INTERP>::segment_real (Phdr *header, uint8_t *mem) throw (std::bad_alloc)
+segment_real<_class, _data, segment_type_INTERP>::segment_real (Phdr *header, uint8_t *mem)
 : segment_data<_class, _data> (header, mem)
 {
   if (this->type != PT_INTERP)
@@ -429,13 +429,13 @@ dynamic_data<_class, _data>::dynamic_data (Dyn *dyn) throw ()
 }
 
 template <typename _class, typename _data>
-void dynamic_data<_class, _data>::update_string(const section_type<section_type_STRTAB> &section) throw (std::bad_alloc)
+void dynamic_data<_class, _data>::update_string(const section_type<section_type_STRTAB> &section)
 {
   if (is_string)
     val_string = section.get_string(val);
 }
 
-std::string symbol::get_version () const throw (std::bad_alloc)
+std::string symbol::get_version () const
 {
   if (verneed)
     return verneed->get_name();
@@ -445,7 +445,7 @@ std::string symbol::get_version () const throw (std::bad_alloc)
   return "Base";
 }
 
-std::string symbol::get_version_file () const throw (std::bad_alloc)
+std::string symbol::get_version_file () const
 {
   if (verneed)
     return verneed->get_file();
@@ -453,7 +453,7 @@ std::string symbol::get_version_file () const throw (std::bad_alloc)
   return "None";
 }
 
-std::string symbol::get_name_version () const throw (std::bad_alloc)
+std::string symbol::get_name_version () const
 {
   std::string ver;
 
@@ -478,13 +478,13 @@ symbol_data<_class, _data>::symbol_data (Sym *sym) throw ()
 }
 
 template <typename _class, typename _data>
-void symbol_data<_class, _data>::update_string(const section_type<section_type_STRTAB> &section) throw (std::bad_alloc)
+void symbol_data<_class, _data>::update_string(const section_type<section_type_STRTAB> &section)
 {
   name_string = section.get_string(name);
 }
 
 template <typename _class, typename _data>
-void symbol_data<_class, _data>::update_version(const file &file, uint16_t index) throw (std::bad_alloc)
+void symbol_data<_class, _data>::update_version(const file &file, uint16_t index)
 {
   if (!file.get_section_GNU_VERSYM())
     return;
@@ -531,13 +531,13 @@ version_definition_data<_class, _data>::version_definition_data (Verdef *verdef)
 }
 
 template <typename _class, typename _data>
-void version_definition_data<_class, _data>::update_string(const section_type<section_type_STRTAB> &section) throw (std::bad_alloc)
+void version_definition_data<_class, _data>::update_string(const section_type<section_type_STRTAB> &section)
 {
   for (std::vector<uint32_t>::iterator it = names.begin(); it != names.end(); ++it)
     names_string.push_back(section.get_string(*it));
 }
 
-version_requirement::version_requirement() throw (std::bad_alloc)
+version_requirement::version_requirement()
 : file_string("None")
 { }
 
@@ -561,7 +561,7 @@ version_requirement_data<_class, _data>::version_requirement_data (Verneed *vern
 
 template <typename _class, typename _data>
 void version_requirement_data<_class, _data>::
-update_string(const section_type<section_type_STRTAB> &section) throw (std::bad_alloc)
+update_string(const section_type<section_type_STRTAB> &section)
 {
   file_string = section.get_string(file);
 
@@ -596,7 +596,7 @@ version_requirement_entry_data(Vernaux *vna, const version_requirement &verneed)
 
 template <typename _class, typename _data>
 void version_requirement_entry_data<_class, _data>::
-update_string(const section_type<section_type_STRTAB> &section) throw (std::bad_alloc)
+update_string(const section_type<section_type_STRTAB> &section)
 {
   name_string = section.get_string(name);
 }
