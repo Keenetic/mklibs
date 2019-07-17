@@ -613,6 +613,12 @@ while 1:
                 symbols.add(ProvidedSymbol('__uClibc_fini', None, None, True))
                 extra_flags.append("-Wl,-init,__uClibc_init")
 
+            if soname in ("libgcc_s.so.1"):
+                symbols.add(ProvidedSymbol('__gcc_personality_v0', None, None, True))
+                symbols.add(ProvidedSymbol('_Unwind_ForcedUnwind', None, None, True))
+                symbols.add(ProvidedSymbol('_Unwind_GetCFA', None, None, True))
+                symbols.add(ProvidedSymbol('_Unwind_Resume', None, None, True))
+
             map_file = find_pic_map(library)
             if map_file:
                 extra_flags.append("-Wl,--version-script=" + map_file)
