@@ -177,6 +177,7 @@ Prints informations about ELF shared objects and executables.\n\
 Mandatory arguments to long options are mandatory for short options too.\n\
 ", stdout);
     fputs ("\
+  -e, --print-elf-header                Print ELF header\n\
   -i, --print-interp                    Print interpreter of executable\n\
   -n, --print-needed                    Print needed shared libs\n\
   -R, --print-rpath                     Print rpath setting\n\
