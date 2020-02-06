@@ -49,6 +49,7 @@ static void process_elf_header (Elf::file *file)
   std::cout
     << (unsigned int) file->get_class () << ' '
     << (unsigned int) file->get_data () << ' '
+    << file->get_type () << ' '
     << file->get_machine () << ' '
     << file->get_flags () << '\n';
 }
