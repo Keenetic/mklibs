@@ -608,6 +608,9 @@ while 1:
                 extra_post_obj.append(sysroot + libc_extras_dir + "/sofini.o")
                 symbols.add(ProvidedSymbol('__dso_handle', None, None, True))
 
+            if soname in ("libc.so",):
+                extra_flags.append("-Wl,--entry,_dlstart")
+
             if soname in ("libc.so.0",):
                 symbols.add(ProvidedSymbol('__uClibc_init', None, None, True))
                 symbols.add(ProvidedSymbol('__uClibc_fini', None, None, True))
@@ -638,7 +641,9 @@ while 1:
             cmd.extend(extra_post_obj)
             cmd.extend(extra_flags)
             cmd.extend(["-L%s" % a for a in [dest_path] + [sysroot + b for b in lib_path if sysroot == "" or b not in ("/" + libdir + "/", "/usr/" + libdir + "/")]])
-            if soname != "libgcc_s.so.1":
+            if soname == "libc.so":
+                cmd.append("-lgcc")
+            elif soname != "libgcc_s.so.1":
                 cmd.append(library_depends_gcc_libnames(so_file))
                 cmd.append(libgcc_link)
             command(target + "gcc", *cmd)
