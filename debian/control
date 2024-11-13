@@ -2,7 +2,7 @@ Source: mklibs
 Section: devel
 Priority: optional
 Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
-Build-Depends: debhelper (>= 9), python (>= 2.6.6-3~), dh-autoreconf
+Build-Depends: debhelper (>= 9), python3, dh-autoreconf
 Standards-Version: 3.8.2.0
 Uploaders: Bastian Blank <waldi@debian.org>, Steve Langasek <vorlon@debian.org>, Christian Perrier <bubulle@debian.org>
 Vcs-Browser: https://anonscm.debian.org/cgit/d-i/mklibs.git
@@ -11,7 +11,7 @@ X-Python-Version: >= 2.4
 
 Package: mklibs
 Architecture: all
-Depends: python (>= 2.4), binutils, gcc, dpkg-dev, mklibs-copy (>= ${source:Version}), ${python:Depends}, ${misc:Depends}
+Depends: python3, binutils, gcc, dpkg-dev, mklibs-copy (>= ${source:Version}), ${python3:Depends}, ${misc:Depends}
 Recommends: libc6-pic | libc6.1-pic | libc0.1-pic | libc0.3-pic
 Description: Shared library reduction script
  mklibs produces cut-down shared libraries that contain only the
@@ -21,7 +21,7 @@ Description: Shared library reduction script
 
 Package: mklibs-copy
 Architecture: any
-Depends: python (>= 2.4), dpkg-dev, ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
+Depends: python3, dpkg-dev, ${python3:Depends}, ${shlibs:Depends}, ${misc:Depends}
 Description: Shared library reduction script
  mklibs-copy produces a minimal set of shared libraries that contain
  only the libs which are required by a particular set of executables.
